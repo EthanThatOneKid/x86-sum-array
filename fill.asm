@@ -14,5 +14,6 @@
 ;  of this license document, but changing it is not allowed.
 
 ; Code Here
+; TODO: Fill array from user input
 
 ; Copyright (C) 2021 Ethan Davidson
