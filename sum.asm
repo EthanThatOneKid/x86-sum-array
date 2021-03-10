@@ -15,5 +15,6 @@
 ;  of this license document, but changing it is not allowed.
 
 ; Sum all items in array
+; See: https://github.com/AaronLieb/cs240/blob/master/assignment3/sum.asm
 
 ; Copyright (C) 2021 Ethan Davidson
