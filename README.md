@@ -2,4 +2,4 @@
 
 > An x86 assembly program that sums a list of numbers.
 
-Read: <https://sites.google.com/a/fullerton.edu/activeprofessor/open-source-info/x86-assembly/x86-examples/memory-organization>
+Read: <https://github.com/belhaghassan/CPSC---240-Assembly-Fall-2020/tree/main/Assignments/Assignment2>
