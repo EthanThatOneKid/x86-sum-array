@@ -5,7 +5,7 @@
 # Description: This file compiles, links, and runs the program.
 #
 # Author: Ethan Davidson
-#         ethandavidson@csu.fullerton.edu
+#         EthanDavidson@csu.fullerton.edu
 #         https://github.com/EthanThatOneKid
 #
 #                     GNU GENERAL PUBLIC LICENSE
@@ -15,20 +15,30 @@
 #  Everyone is permitted to copy and distribute verbatim copies
 #  of this license document, but changing it is not allowed.
 
-echo "Assemble float-input-output.asm"
-nasm -f elf64 -l float-input-output.lis -o float-input-output.o float-input-output.asm
+echo "Compile `main.c`"
+gcc -c -Wall -m64 -no-pie -o main.o main.c -std=c11
 
-echo "Compile manage-floats.c using the gcc compiler standard 2011"
-gcc -c -Wall -m64 -no-pie -o manage-floats.o manage-floats.c -std=c11
+echo "Compile `control.asm`"
+nasm -f elf64 -l control.lis -o control.o control.asm
 
-echo "Link the object files using the gcc linker standard 2011"
-gcc -m64 -no-pie -o three-numbers.out manage-floats.o float-input-output.o -std=c11
+echo "Compile `fill.asm`"
+nasm -f elf64 -l fill.lis -o fill.o fill.asm
 
-echo "Run the program Floating IO:"
-./three-numbers.out
+echo "Compile `sum.asm`"
+nasm -f elf64 -l sum.lis -o sum.o sum.asm
 
-echo "The script file will terminate"
+echo "Compile `display.cpp`"
+gcc -c -Wall -m64 -no-pie -o display.o display.cpp -std=c++17
 
-# Finally, when the program exits, the temporary files shall be removed.
+echo "Link each object file"
+gcc -m64 -no-pie -o a.out -std=c++17 main.o control.o fill.o sum.o display.o
+
+echo "Run the program"
+./a.out
+
+echo "Delete temporary files"
 rm *.o
+rm *.lis
 rm *.out
+
+echo "Terminating script file"

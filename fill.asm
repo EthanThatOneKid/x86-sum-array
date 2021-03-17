@@ -3,7 +3,7 @@
 ; Description: _
 
 ; Author: Ethan Davidson
-;         ethandavidson@csu.fullerton.edu
+;         EthanDavidson@csu.fullerton.edu
 ;         https://github.com/EthanThatOneKid
 
 ;                     GNU GENERAL PUBLIC LICENSE

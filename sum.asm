@@ -4,7 +4,7 @@
 ;              and returns the sum at the end.
 ;
 ; Author: Ethan Davidson
-;         ethandavidson@csu.fullerton.edu
+;         EthanDavidson@csu.fullerton.edu
 ;         https://github.com/EthanThatOneKid
 ;
 ;                     GNU GENERAL PUBLIC LICENSE
