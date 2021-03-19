@@ -20,7 +20,9 @@
 extern "C" void display(double array[], long size);
 
 void display(double array[], long size) {
-  printf("Hello from DISPLAY.cpp!");
+  for (int i = 0; i < size; i++) {
+    printf("%.8f\n", array[i]);
+  }
 }
 
 // Copyright (C) 2021 Ethan Davidson

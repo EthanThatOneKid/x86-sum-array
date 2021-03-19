@@ -25,11 +25,11 @@ int main() {
 	printf("Welcome to High Speed Array Summation by Ethan Davidson.\n");
 	printf("Software licensed by GNU GPL 3.0.\n");
 	printf("Version 1.0 released March 21st.\n\n");
-	result = manager(); // calls manager.asm and returns sum of array
-	printf("Main has recieved %ld and will keep it.\n", result);
+	result = control();
+	printf("Main has recieved %f and will keep it.\n", result);
   printf("Thank you for using High Speed Array Software.\n");
-  printf("For system support, contact Ethan Davidson at ethandavidson@csu.fullerton.edu.\n");
-  printf("A zero will be returned to the operating system.");
+  printf("For system support, contact Ethan Davidson at EthanDavidson@csu.fullerton.edu.\n");
+  printf("A zero will be returned to the operating system.\n");
 	return 0;
 }
 

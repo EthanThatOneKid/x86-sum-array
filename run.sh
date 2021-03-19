@@ -15,19 +15,19 @@
 #  Everyone is permitted to copy and distribute verbatim copies
 #  of this license document, but changing it is not allowed.
 
-echo "Compile `main.c`"
+echo "Compile main.c"
 gcc -c -Wall -m64 -no-pie -o main.o main.c -std=c11
 
-echo "Compile `control.asm`"
+echo "Compile control.asm"
 nasm -f elf64 -l control.lis -o control.o control.asm
 
-echo "Compile `fill.asm`"
+echo "Compile fill.asm"
 nasm -f elf64 -l fill.lis -o fill.o fill.asm
 
-echo "Compile `sum.asm`"
+echo "Compile sum.asm"
 nasm -f elf64 -l sum.lis -o sum.o sum.asm
 
-echo "Compile `display.cpp`"
+echo "Compile display.cpp"
 gcc -c -Wall -m64 -no-pie -o display.o display.cpp -std=c++17
 
 echo "Link each object file"
@@ -42,3 +42,5 @@ rm *.lis
 rm *.out
 
 echo "Terminating script file"
+
+# Copyright © 2021 Ethan Davidson
