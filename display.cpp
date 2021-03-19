@@ -17,8 +17,6 @@
 
 #include <stdio.h>
 
-extern "C" double control();
-
 extern "C" void display(double array[], long size);
 
 void display(double array[], long size) {
