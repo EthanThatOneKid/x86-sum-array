@@ -15,7 +15,7 @@
 
 ### Install Dependencies
 
-This project depends on the existance of several programs and is intended to be used within a Linux-like terminal.
+This project depends on the existence of several programs and is intended to be used within a Linux-like terminal.
 
 ```sh
 sudo apt-install gcc g++ nasm nano
@@ -28,3 +28,7 @@ git clone https://github.com/EthanThatOneKid/x86-sum-array.git
 ```
  
 or [download the repository](https://github.com/EthanThatOneKid/x86-sum-array/archive/main.zip) and manually locate a place for it to live on your machine.
+
+---
+
+Assembled with 💖 by [EthanThatOneKid](https://github.com/EthanThatOneKid/)
