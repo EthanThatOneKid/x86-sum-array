@@ -1,7 +1,8 @@
 /**
  * Name: "display.cpp"
  *
- * Description: _
+ * Description: The function exported by this file prints the contents
+ *              of an array to the standard output.
  * 
  * Author: Ethan Davidson
  *         EthanDavidson@csu.fullerton.edu
@@ -17,12 +18,14 @@
 
 #include <stdio.h>
 
-extern "C" void display(double array[], long size);
+extern "C" void display(double*, long);
 
-void display(double array[], long size) {
-  for (int i = 0; i < size; i++) {
-    printf("%.8f\n", array[i]);
+void display(double* array, long size) {
+  printf("Your numbers were ");
+  for (long i = 0; i < size; i++) {
+    printf("%.8f, ", *(array + i));
   }
+  printf("and that's all.\n");
 }
 
-// Copyright (C) 2021 Ethan Davidson
+// Copyright © 2021 Ethan Davidson

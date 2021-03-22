@@ -1,7 +1,7 @@
 ; Name: "sum.asm"
 ; 
-; Description: This module sums a list of given floats
-;              and returns the sum at the end.
+; Description: This module sums an array of floats
+;              and returns its sum at the end.
 ;
 ; Author: Ethan Davidson
 ;         EthanDavidson@csu.fullerton.edu
@@ -19,7 +19,7 @@ extern printf
 
 ; Constants
 section .data
-  dialog_1 db "The sum of these values is %.8ld.", 0xA, 0x0
+  dialog_1 db "The sum of these values is %.8lf.", 0xA, 0x0
 
 ; Exports
 section .text
@@ -48,25 +48,38 @@ sum:
   ; Prepare to Sum
 	mov r12, rdi; r12 = pointer_of_array
 	mov r13, rsi; r13 = amount_in_array
-	mov r14, 0x0; r14 = total
-	mov r15, 0x0; r15 = current_index
+	mov r14, 0x0; r14 = current_index
+	mov r15, 0x0
+	cvtsi2sd xmm15, r15; xmm15 = total
 
 loop:
-	add r14, [r12 + 8 * r15] ; adds current value at index to accumulator
-	inc r15									 ; increments current index
 
-	cmp r15, r13 ; tests if the current index is equal to the number of elements
-	je end ; if true, end
-	jne loop ; else, continue loop
+	; Add the current_value to the total.
+	addsd xmm15, [r12 + 8 * r14]
 
-end:
-	mov rdi, dialog_1 ; print the number of elements summed and the sum
-	mov rsi, r13 ; num elements
-	mov rdx, r14 ; sum
-	mov rax, 0
+	; Increment the current_index.
+	inc r14
+
+	; Check if every number has been summed (current_index == amount_in_array).
+	cmp r14, r13
+
+	; If so, break out of this loop.
+	je end_sum
+	
+	; Otherwise, continue summing numbers at high speeds.
+	jmp loop
+
+end_sum:
+
+	; Display the resulting sum.
+	mov rax, 0x1
+	mov rdi, dialog_1
+	mov rsi, r13
+	movsd xmm0, xmm15
 	call printf
 
-	mov rax, r14 ; move sum to rax to be returned
+	; Place the sum into xmm0 to be returned to the caller.
+	movsd xmm0, xmm15
 
 	; 15 pops
 	pop r15

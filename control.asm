@@ -1,6 +1,9 @@
 ; Name: "control.asm"
 ;
-; Description: _
+; Description: This file is responsible for orchestrating the
+;              user inputting floats into an array, displaying
+;              the array, and calculating the sum of the user-
+;              entered numbers.
 ;
 ; Author: Ethan Davidson
 ;         EthanDavidson@csu.fullerton.edu
@@ -21,10 +24,10 @@ extern sum
 
 ; Constants
 section .data
-  dialog_1 db "This program will sum your array of integers", 0xA, 0x0
-  dialog_2 db "The sum will now be returned to the main function.", 0xA, 0xA, 0x0
+  dialog_1 db "This program will sum your array of integers.", 0xA, 0x0
+  dialog_2 db "The sum will now be returned to the main function.", 0xA, 0x0
   debug_dialog_1 db "There are %d elements in the array.", 0xA, 0x0
-  maximum_array_size equ 100
+  maximum_array_size equ 10
 
 ; Statically Allocated Variable(s)
 section .bss
@@ -54,44 +57,46 @@ control:
   pushf
 
   ; Dummy push to the align stack.
-  push qword -999
+  push qword 0x0
 
-  ; Print Welcome Message
+  ; Print the welcome message.
   mov rdi, dialog_1
   mov rax, 0x0
   call printf
 
-  ; Fill Array
+  ; Fill the array.
+  mov rax, 0x0
   mov rdi, array
   mov rsi, maximum_array_size
   call fill
+
+  ; Place the array_size into r15.
   mov r15, rax
 
-  ; Print Debug Message
+  ; Pop the dummy value to re-align the stack.
+  pop rax
+
+  ; Display the array.
   mov rax, 0x0
-  mov rdi, debug_dialog_1
+  mov rdi, array
   mov rsi, r15
-  call printf
+  call display
 
-  ; Display Array
-  ; mov rax, 0x0
-  ; mov rdi, array
-  ; mov rsi, r15
-  ; call display
-  pop rax ; Pop the dummy value that the aligned stack.
+  ; Sum the array.
+  mov rax, 0x1
+  mov rdi, array
+  mov rsi, r15
+  call sum
 
-  ; Sum Array
-  ; mov rdi, array
-  ; mov rsi, r15
-  ; mov rax, 0x0
-  ; call sum
-  ; mov r15, rax; Places sum into r15.
+  ; Place the sum into xmm15.
+  movsd xmm15, xmm0
 
-  ; Print Goodbye Message
+  ; Print the goodbye message.
   mov rdi, dialog_2
   call printf
 
-  ; mov rax, r15
+  ; Place the sum into xmm0 to be returned to the caller.
+  movsd xmm0, xmm15
 
   ; 15 pops
 	popf
@@ -111,4 +116,4 @@ control:
 	pop rbp
 	ret
 
-; Copyright (C) 2021 Ethan Davidson
+; Copyright © 2021 Ethan Davidson

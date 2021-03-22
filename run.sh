@@ -33,14 +33,15 @@ gcc -c -Wall -m64 -no-pie -o display.o display.cpp -std=c++17
 echo "Link each object file"
 gcc -m64 -no-pie -o a.out -std=c++17 main.o control.o fill.o sum.o display.o
 
-echo "Run the program"
+echo "--- PROGRAM START ---"
 ./a.out
+echo "---- PROGRAM END ----"
 
 echo "Delete temporary files"
 rm *.o
 rm *.lis
 rm *.out
 
-echo "Terminating script file"
+echo "Terminate script file"
 
 # Copyright © 2021 Ethan Davidson

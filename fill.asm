@@ -1,6 +1,9 @@
 ; Name: "fill.asm"
 ;
-; Description: _
+; Description: This module first asks for some user-entered floating
+;              point numbers. Once the user finishes (by pressing Ctrl+D),
+;              this module will return the number of numbers that were
+;              placed into the array.
 ;
 ; Author: Ethan Davidson
 ;         EthanDavidson@csu.fullerton.edu
@@ -20,8 +23,8 @@ extern atof
 
 ; Constants
 section .data
+  dialog_1 db "Please enter floating point numbers seperated by white space or carriage returns.", 0xA, "When you have finished, press enter followed by Ctrl+D.", 0xA, 0x0
   float_format db "%lf", 0x0
-  dialog_1 db "Index: %d", 0xA, 0x0
 
 ; Exports
 section .text
@@ -29,6 +32,7 @@ section .text
 
 ; Fill Module
 fill:
+
   ; 15 Pushes
   push rbp
   mov rbp, rsp
@@ -47,51 +51,43 @@ fill:
   push r15
   pushf
 
-  ; Set up registers.
+  ; Set up some useful registers.
   mov r12, rsi; maximum_size_of_array
   mov r14, rdi; pointer_to_array
   mov r15, 0x0; current_index
 
-  ; Prepare for input loop.
-  push qword -999; Align stack with dummy push.
-  ; sub rsp, 0x400; Create space on top of stack to recieve a double.
+  ; Prepare for input loop by aligning the stack with a dummy push.
+  push qword 0x0
+
+  ; Print the message. "Please enter floating point numbers..."
+  mov rax, 0x0
+  mov rdi, dialog_1
+  call printf
+
+  ; Jump into the loop.
   jmp start_loop
 
 ; Input Loop
 start_loop:
 
-  ; Print Debug Message
-  ; mov rax, 0x0
-  ; mov rdi, dialog_1
-  ; mov rsi, r15
-  ; call printf
-
   ; Scan for keyboard input.
-  ; mov rax, 0x0
-  ; mov rdi, float_format
-  ; ; push qword 0x0
-  ; mov rsi, rsp
-  ; call scanf
+  mov rax, 0x0
+  mov rdi, float_format
+  mov rsi, rsp
+  call scanf
 
   ; Check if Ctrl+D is selected.
-  ; cdqe
-  ; cmp rax, -1
+  cdqe
+  cmp rax, -1
 
   ; If so, break out of this input loop.
-  ; je end_loop
+  je end_loop
 
-  ; Place the user-inputted double into xmm0.
-  ; mov qword rax, 0x1
-  ; mov qword rdi, rsp
-  ; call atof
-
-  mov r8, 0x1
-  cvtsi2sd xmm0, r8
+  ; Store keyboard input into xmm15.
+  movsd xmm15, [rsp]
 
   ; Place the double into the array.
-  ; Address = pointer_to_array + (8 * current_index).
-  movsd xmm15, xmm0; xmm0 is the result of the most recent atof call.
-  movsd [r14 + 8 * r15], xmm0
+  movsd [r14 + 8 * r15], xmm15
 
   ; Increment the current_index.
   inc r15
@@ -102,19 +98,14 @@ start_loop:
   ; If so, break out of this input loop.
   je end_fill
 
-  ; Return to the top of the input loop.
+  ; Otherwise, return to the top of the input loop.
   jmp start_loop
 
 end_loop:
-  ; pop r8
-
 end_fill:
 
   ; Return the number of elements in the array.
   mov rax, r15
-
-  ; Remove space on top of stack to recieve a double.
-  ; add rsp, 0x400
 
   ; Pop dummy push from earlier.
   pop r8
@@ -137,4 +128,4 @@ end_fill:
 	pop rbp
 	ret
 
-; Copyright (C) 2021 Ethan Davidson
+; Copyright © 2021 Ethan Davidson
