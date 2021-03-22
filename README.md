@@ -2,11 +2,9 @@
 
 > An x86 assembly program that sums a list of numbers.
 
-- [Project Info](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZnVsbGVydG9uLmVkdXxhY3RpdmVwcm9mZXNzb3J8Z3g6NGU2MDc3ZmU0YWVhNjJlMQ)
-
 ## License 🔑
 
-This project utilizes version 3 of the GNU General Public License, <https://fsf.org/>.
+This project utilizes version 3 of the GNU General Public License as seen on <https://fsf.org/>.
 
 ## Usage ✨
 
