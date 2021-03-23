@@ -4,7 +4,7 @@
 
 ## License 🔑
 
-This project utilizes version 3 of the GNU General Public License as seen on <https://fsf.org/>.
+This project utilizes version 3 of the [GNU General Public License](LICENSE).
 
 ## Usage ✨
 
