@@ -18,11 +18,13 @@
 
 #include <stdio.h>
 
-extern "C" void display(double*, long);
+extern "C" void display(double *, long);
 
-void display(double* array, long size) {
+void display(double *array, long size)
+{
   printf("Your numbers were ");
-  for (long i = 0; i < size; i++) {
+  for (long i = 0; i < size; i++)
+  {
     printf("%.8f, ", *(array + i));
   }
   printf("and that's all.\n");
